@@ -26,7 +26,7 @@ const GameScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Robot pressedKey={pressedKey} />
+      <Robot /> {/* Add this line to display the robot */}
       <OnScreenKeyboard onKeyPress={handleKeyPress} />
       <WordDisplay
         imageUrl={wordData.imageUrl}
