@@ -6,46 +6,46 @@ The frontend of the Typee App is built using React Native, a popular framework f
 
 # Project Structure
 Here's an overview of the project structure:
-
-typee-app-frontend/
-├── public/
-│ ├── index.html
-│ │ - The main HTML file that serves as a template and includes the root element where the React app is injected.
-│ ├── favicon.ico
-│ │ - The favicon for the web app.
-│ ├── manifest.json
-│ │ - A JSON configuration file that provides metadata about the app, such as name, icons, and display settings.
-├── src/
-│ ├── components/
-│ │ ├── OnScreenKeyboard.js
-│ │ │ - The onscreen keyboard component displayed on the home screen, allowing the child to type.
-│ │ └── GalleryCard.js
-│ │ - A component representing a single word card in the gallery, displaying the word's picture, explanation, fact, and story.
-│ ├── screens/
-│ │ ├── GalleryScreen.js
-│ │ │ - Displays the gallery of words, showing their pictures, explanations, facts, and stories fetched from the backend API.
-│ │ ├── HomeScreen.js
-│ │ │ - Displays Typee the robot with the onscreen keyboard, allowing the child to type. As the child types, the app asynchronously checks if a word is safe, integrating with the backend API.
-│ │ ├── LoginScreen.js
-│ │ │ - Provides the login screen, allowing users to authenticate using Google Sign-In and integrating with the backend API for authentication.
-│ │ └── RegisterScreen.js
-│ │ - Provides the registration screen for new users, integrating with the backend API for user registration.
-│ ├── App.js
-│ │ - The main application component, responsible for rendering the different screens based on the current state (e.g., logged in, logged out).
-│ ├── index.js
-│ │ - The entry point of the React application, where the main App component is rendered into the DOM.
-│ ├── apiClient.js
-│ │ - Contains the functions to interact with the backend API, wrapping HTTP requests and handling responses.
-│ └── auth.js
-│ - Handles the authentication logic, such as Google Sign-In integration and token management.
-├── package.json
-│ - Lists the project's dependencies and scripts.
-├── package-lock.json
-│ - Automatically generated file that locks the versions of the installed dependencies.
-├── .gitignore
-│ - Specifies the files and directories to be ignored by Git.
-└── README.md
-- Provides an overview of the project, its purpose, how to install and run the app, and information on how to contribute.
+    
+    typee-app-frontend/
+    ├── public/
+    │ ├── index.html
+    │ │ - The main HTML file that serves as a template and includes the root element where the React app is injected.
+    │ ├── favicon.ico
+    │ │ - The favicon for the web app.
+    │ ├── manifest.json
+    │ │ - A JSON configuration file that provides metadata about the app, such as name, icons, and display settings.
+    ├── src/
+    │ ├── components/
+    │ │ ├── OnScreenKeyboard.js
+    │ │ │ - The onscreen keyboard component displayed on the home screen, allowing the child to type.
+    │ │ └── GalleryCard.js
+    │ │ - A component representing a single word card in the gallery, displaying the word's picture, explanation, fact, and story.
+    │ ├── screens/
+    │ │ ├── GalleryScreen.js
+    │ │ │ - Displays the gallery of words, showing their pictures, explanations, facts, and stories fetched from the backend API.
+    │ │ ├── HomeScreen.js
+    │ │ │ - Displays Typee the robot with the onscreen keyboard, allowing the child to type. As the child types, the app asynchronously checks if a word is safe, integrating with the backend API.
+    │ │ ├── LoginScreen.js
+    │ │ │ - Provides the login screen, allowing users to authenticate using Google Sign-In and integrating with the backend API for authentication.
+    │ │ └── RegisterScreen.js
+    │ │ - Provides the registration screen for new users, integrating with the backend API for user registration.
+    │ ├── App.js
+    │ │ - The main application component, responsible for rendering the different screens based on the current state (e.g., logged in, logged out).
+    │ ├── index.js
+    │ │ - The entry point of the React application, where the main App component is rendered into the DOM.
+    │ ├── apiClient.js
+    │ │ - Contains the functions to interact with the backend API, wrapping HTTP requests and handling responses.
+    │ └── auth.js
+    │ - Handles the authentication logic, such as Google Sign-In integration and token management.
+    ├── package.json
+    │ - Lists the project's dependencies and scripts.
+    ├── package-lock.json
+    │ - Automatically generated file that locks the versions of the installed dependencies.
+    ├── .gitignore
+    │ - Specifies the files and directories to be ignored by Git.
+    └── README.md
+    - Provides an overview of the project, its purpose, how to install and run the app, and information on how to contribute.
 
 This project structure does not include the ios and android folders, and the babel.config.json file has been removed. The explanations for each file are provided, along with any necessary backend integrations.
 
