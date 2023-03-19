@@ -1,5 +1,5 @@
-import client from './client';
-import { checkAuthentication, getIdToken } from '../helpers/firebaseHelper';
+import client from 'api/client';
+import { checkAuthentication, getIdToken } from 'helpers/firebaseHelper';
 
 const apiClient = {
   async post(path, data) {
