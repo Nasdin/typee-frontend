@@ -1,10 +1,10 @@
 import axios from 'axios';
+import { checkIfEnglishWord } from 'check-if-word';
 
 const OPENAI_API_KEY = 'your_openai_api_key';
 
 const getWordData = async (word) => {
-
-    import { checkIfEnglishWord } from 'check-if-word';
+s
 
     // In your handleKeyPress function, add this check before making API calls:
     if (checkIfEnglishWord(word + key)) {
