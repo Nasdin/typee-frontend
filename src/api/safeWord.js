@@ -1,7 +1,15 @@
-import client from './client';
+import apiClient from './client';
 
 const safeWordAPI = {
-  checkSafeWord: (word) => client.post('/is-word-safe', { word }),
+  async checkSafeWord(word) {
+    try {
+      const response = await apiClient.post('/api/v1/word/safe', { word });
+      return response;
+    } catch (error) {
+      console.error('Error checking if word is safe:', error);
+      throw error;
+    }
+  },
 };
 
 export default safeWordAPI;

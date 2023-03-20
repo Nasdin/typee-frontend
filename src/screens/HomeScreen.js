@@ -1,54 +1,78 @@
-import React, { useState, useEffect } from "react";
-import TypeeRobot from "../components/TypeeRobot";
-import OnScreenKeyboard from "../components/OnScreenKeyboard";
-import { isWordSafe } from "../api";
-import isEnglishWord from "../helpers/isEnglishWord";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import OnScreenKeyboard from '../components/OnScreenKeyboard';
+import TypeeRobot from '../components/TypeeRobot';
+import { isWordSafe, getKidWordEncyclopedia } from '../api';
+import isEnglishWord from '../helpers/inEnglishWord';
 
-function HomeScreen() {
-  const [input, setInput] = useState("");
-  const [wordIsSafe, setWordIsSafe] = useState(false);
-  const [wordData, setWordData] = useState({});
+const HomeScreen = () => {
+  const [currentWord, setCurrentWord] = useState('');
+  const [wordInfo, setWordInfo] = useState(null);
 
   useEffect(() => {
-    const checkWordSafety = async () => {
-      if (input.length > 0) {
-        const isEnglish = isEnglishWord(input);
-        if (isEnglish) {
-          const safe = await isWordSafe(input);
-          setWordIsSafe(safe);
-          if (safe) {
-            // Only fetch word data if the word is safe
-            try {
-              const data = await getKidWordEncyclopedia(input);
-              setWordData(data);
-            } catch (error) {
-              console.error('Error fetching word data:', error);
-            }
-          }
-        } else {
-          setWordIsSafe(false);
-          setWordData({});
+    const fetchWordInfo = async () => {
+      if (currentWord.length > 0 && isEnglishWord(currentWord)) {
+        const isSafe = await isWordSafe(currentWord);
+        if (isSafe) {
+          const info = await getKidWordEncyclopedia(currentWord);
+          setWordInfo(info);
         }
-      } else {
-        setWordIsSafe(false);
-        setWordData({});
       }
     };
-    checkWordSafety();
-  }, [input]);
+    fetchWordInfo();
+  }, [currentWord]);
+
+  const handleKeyPress = (key) => {
+    setCurrentWord((prevWord) => prevWord + key);
+  };
 
   return (
-    <div className="home-screen">
-      <TypeeRobot wordIsSafe={wordIsSafe} />
-      <OnScreenKeyboard input={input} setInput={setInput} />
-      <WordDisplay
-        imageUrl={wordData.imageUrl}
-        explanation={wordData.explanation}
-        story={wordData.story}
-        fact={wordData.fact}
-      />
-    </div>
+    <View style={styles.container}>
+      <View style={styles.leftSidebar}>
+        {/* Display word information */}
+        {wordInfo && (
+          <>
+            <Text style={styles.wordInfoTitle}>{currentWord}</Text>
+            <Text>{wordInfo.explanation}</Text>
+            <Text>{wordInfo.story}</Text>
+            <Text>{wordInfo.fact}</Text>
+          </>
+        )}
+      </View>
+      <TypeeRobot />
+      <OnScreenKeyboard onPress={handleKeyPress} />
+      <View style={styles.rightSidebar}>
+        {/* Display image */}
+        {wordInfo && (
+          <img src={wordInfo.imageUrl} alt={currentWord} style={styles.wordImage} />
+        )}
+      </View>
+    </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  leftSidebar: {
+    flex: 1,
+    padding: 20,
+  },
+  rightSidebar: {
+    flex: 1,
+    padding: 20,
+  },
+  wordInfoTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  wordImage: {
+    width: '100%',
+    height: 'auto',
+  },
+});
 
 export default HomeScreen;

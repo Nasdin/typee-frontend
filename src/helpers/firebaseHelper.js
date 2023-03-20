@@ -45,4 +45,21 @@ const getIdToken = async () => {
   }
 };
 
-export { checkAuthentication, getIdToken };
+export const authenticateUser = async () => {
+  try {
+    const { isAuthenticated, idToken } = await checkAuthentication();
+    if (isAuthenticated) {
+      localStorage.setItem('token', idToken);
+    } else {
+      localStorage.removeItem('token');
+    }
+    return isAuthenticated;
+  } catch (error) {
+    console.error('Error authenticating user:', error);
+    throw error;
+  }
+};
+
+
+export { checkAuthentication, getIdToken, authenticateUser };
+

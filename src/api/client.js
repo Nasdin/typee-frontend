@@ -13,4 +13,15 @@ client.interceptors.request.use(async (config) => {
   return config;
 });
 
-export default client;
+const apiClient = {
+  async post(path, data) {
+    const response = await client.post(path, data);
+    return response.data;
+  },
+  async get(path) {
+    const response = await client.get(path);
+    return response.data;
+  },
+};
+
+export default apiClient;
